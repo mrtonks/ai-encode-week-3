@@ -1,7 +1,32 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# AI Panintings description assistant
+## Overview
+This project is part of third weekend assignment. The goal is to create an application using Next.js and OpenAI's API that allows users to get detailed descriptions of paintings based on short descriptions they provide.
+
+## Team members
+1. Jesús Vera
+2. Aleksandar Brayanov
+3. Sofía Orellano
+
+## Project features
+- **Theme Selection**: users can select painting themes from a list.
+- **Description generation**: the assistant generates detailed descriptions of paintings based on user-provided inputs, including elements, style, details, and colors.
+- **Stream description response**: responses are streamed in real-time, providing immediate feedback and enhancing user interaction.
+- **Display of user input in chat mode**: user inputs and AI responses are displayed in a chat-like interface, mimicking a conversation for better user experience.
+- **Animation loading**: an animation is shown while the AI assistant processes the user's request, indicating that the system is working (aligning with Norman's feedback principle).
+- **Display real-time assistant name**: the AI assistant name is displayed in real-time, personalizing the interaction and making it more engaging for the user.
 
 ## Getting Started
+This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
+## Pre-requisites
+Install dependencies:
+```bash
+npm install
+# or
+yarn install
+```
+
+## Running the Development Server
 First, run the development server:
 
 ```bash
