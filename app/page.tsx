@@ -122,6 +122,31 @@ export default function Home() {
     }
   }, [messages])
 
+  if (imageIsLoading) {
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <div className="loader">
+          <div className="animate-pulse flex space-x-4">
+            <div className="rounded-full bg-slate-700 h-10 w-10"></div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (image) {
+    return (
+      <div className="card w-full h-screen max-w-md py-24 mx-auto stretch">
+        <img src={`data:image/jpeg;base64,${image}`} />
+        <textarea
+          className="mt-4 w-full text-white bg-black h-64"
+          value={messages[messages.length - 1].content}
+          readOnly
+        />
+      </div>
+    );
+  }
+
   return (
     <main className="container mx-auto h-screen">
       <div className="text-center mb-6 mt-2">
