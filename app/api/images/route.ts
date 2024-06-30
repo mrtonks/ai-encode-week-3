@@ -7,12 +7,12 @@ const openai = new OpenAI({
 export const runtime = "edge";
 
 export async function POST(req: Request) {
-  const { message } = await req.json();
+  const { message, imageSize } = await req.json();
   const prompt = `Generate an image that describes the following recipe: ${message}`;
   const response = await openai.images.generate({
     model: "dall-e-2",
     prompt: prompt.substring(0, Math.min(prompt.length, 1000)),
-    size: "1024x1024",
+    size: imageSize,
     quality: "standard",
     response_format: "b64_json",
     n: 1,

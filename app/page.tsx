@@ -16,6 +16,7 @@ export default function Home() {
 
   const [imageIsLoading, setImageIsLoading] = useState(false);
   const [image, setImage] = useState<string | null>(null);
+  const [imageSize, setImageSize] = useState<string>('1024x1024');
 
   const themes = [
     { emoji: '🌲', value: 'Nature and Landscapes' },
@@ -33,6 +34,12 @@ export default function Home() {
     { emoji: '🌊', value: 'Seascapes and Marine' },
     { emoji: '🏡', value: 'Everyday Life' },
     { emoji: '🏅', value: 'Sports and Recreation' },
+  ]
+
+  const imageSizes = [
+    { emoji: '🌲', value: '256x256' },
+    { emoji: '🏙️', value: '512x512' },
+    { emoji: '👤', value: '1024x1024' },
   ]
 
   const handleGenerateDescription = async (): Promise<void> => {
@@ -94,6 +101,7 @@ export default function Home() {
       },
       body: JSON.stringify({
         message: messages[messages.length - 1].content,
+        imageSize: imageSize,
       }),
     });
     const data = await response.json();
@@ -196,7 +204,32 @@ export default function Home() {
                 onClick={handleGenerateDescription}>
                 Generate Description
               </button>
-              {messages.length === 2 && (
+              {messages.length === 2 && !isLoading && (
+              <div className="space-y-4 bg-opacity-25 bg-gray-700 rounded-lg p-4">
+                  <h3 className="text-xl font-semibold">Image Properties</h3>
+                  <div className="flex flex-wrap justify-center">
+                    <h4 className="text-xl font-semibold">Size</h4>
+                    {imageSizes.map(({ value, emoji }) => (
+                      <div
+                        key={value}
+                        className="w-full md:w-max p-4 m-2 bg-opacity-25 bg-gray-600 rounded-lg text-sm">
+                        <input
+                          id={value}
+                          type="radio"
+                          name="size"
+                          value={value}
+                          checked={value === imageSize}
+                          onChange={(e) => setImageSize(e.target.value)}
+                        />
+                        <label className="ml-2" htmlFor={value}>
+                          {`${emoji} ${value}`}
+                        </label>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+              {messages.length === 2 && !isLoading && (
                 <button
                   type="button"
                   className="w-full bg-green-500 text-white mt-1 py-2 px-4 rounded-md hover:bg-green-600 focus:outline-none focus:ring-4 focus:ring-gray-300 mb-5"
