@@ -14,6 +14,9 @@ export default function Home() {
   const [messages, setMessages] = useState<Array<IMessage>>([])
   const [assistantName, setAssistantName] = useState<string>('')
 
+  const [imageIsLoading, setImageIsLoading] = useState(false);
+  const [image, setImage] = useState<string | null>(null);
+
   const themes = [
     { emoji: '🌲', value: 'Nature and Landscapes' },
     { emoji: '🏙️', value: 'Urban and Cityscapes' },
@@ -82,9 +85,20 @@ export default function Home() {
     setIsLoading(false)
   }
 
-  const handleGenerateImage = () : void => {
-    // TODO: Write endpoint and generate image
-    console.log(messages[messages.length - 1].content)
+  const handleGenerateImage = async (): Promise<void> => {
+    setImageIsLoading(true);
+    const response = await fetch("api/images", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        message: messages[messages.length - 1].content,
+      }),
+    });
+    const data = await response.json();
+    setImage(data);
+    setImageIsLoading(false);
   }
 
   const messagesContainerRef = useRef<HTMLDivElement>(null)
