@@ -253,14 +253,14 @@ export default function Home() {
                     onClick={handleGenerateImage}>
                     Generate Image
                   </button>
-                  <div className="space-y-4 bg-opacity-25 bg-gray-700 rounded-lg p-4">
+                  <div className="space-y-4 bg-opacity-25 bg-blue-700 rounded-lg p-4">
                       <h3 className="text-xl font-semibold">Image Generation Properties</h3>
-                      <div className="flex flex-wrap justify-center bg-gray-650  rounded-lg p-4">
+                      <div className="flex flex-wrap justify-left bg-gray-700 rounded-lg p-2">
                         <h5 className="text-l font-semibold">Model</h5>
                         {imageModels.map(({ value, emoji }) => (
                           <div
                             key={value}
-                            className="p-4 m-2 bg-opacity-25 bg-gray-600 rounded-lg text-sm">
+                            className="p-4 m-2 bg-opacity-25 bg-gray-300 rounded-lg text-sm">
                             <input
                               id={value}
                               type="radio"
@@ -281,13 +281,13 @@ export default function Home() {
                         ))}
                       </div>
                       {imageModel === 'dall-e-2' && (
-                        <div>
-                          <div className="flex flex-wrap justify-center">
+                        <div className='bg-gray-600 rounded-lg p-2'>
+                          <div className="flex flex-wrap justify-left">
                             <h5 className="text-l font-semibold">Size</h5>
                             {imageSizesDALLE2.map(({ value, emoji }) => (
                               <div
                                 key={value}
-                                className="w-full md:w-max p-4 m-2 bg-opacity-25 bg-gray-600 rounded-lg text-sm">
+                                className="w-full md:w-max p-5 m-2 bg-opacity-25 bg-gray-300 rounded-lg text-sm">
                                 <input
                                   id={value}
                                   type="radio"
@@ -305,13 +305,13 @@ export default function Home() {
                       </div>
                     )}
                     {imageModel === 'dall-e-3' && (
-                      <div>
-                        <div className="flex flex-wrap justify-center">
+                      <div className='bg-gray-600 rounded-lg p-2'>
+                        <div className="flex flex-wrap justify-left bg-gray-500 rounded-md p-2 mx-1 mb-2">
                           <h5 className="text-l font-semibold">Size</h5>
                           {imageSizesDALLE3.map(({ value, emoji }) => (
                             <div
                               key={value}
-                              className="w-full md:w-max p-4 m-2 bg-opacity-25 bg-gray-600 rounded-lg text-sm">
+                              className="w-full md:w-max p-4 m-2 bg-opacity-25 bg-gray-300 rounded-lg text-sm">
                               <input
                                 id={value}
                                 type="radio"
@@ -326,12 +326,12 @@ export default function Home() {
                             </div>
                           ))}
                         </div>
-                        <div className="flex flex-wrap justify-center">
+                        <div className="flex flex-wrap justify-left bg-gray-500 rounded-md p-2 mx-1 mb-2">
                           <h5 className="text-l font-semibold">Quality</h5>
                           {imageQuality.map(({ value, emoji }) => (
                             <div
                               key={value}
-                              className="w-full md:w-max p-4 m-2 bg-opacity-25 bg-gray-600 rounded-lg text-sm">
+                              className="w-full md:w-max p-4 m-2 bg-opacity-25 bg-gray-300 rounded-lg text-sm">
                               <input
                                 id={value}
                                 type="radio"
@@ -346,12 +346,12 @@ export default function Home() {
                             </div>
                           ))}
                         </div>
-                        <div className="flex flex-wrap justify-center">
+                        <div className="flex flex-wrap justify-left bg-gray-500 rounded-md p-2 mx-1 mt-1">
                           <h5 className="text-l font-semibold">Style</h5>
                           {imageStyle.map(({ value, emoji }) => (
                             <div
                               key={value}
-                              className="w-full md:w-max p-4 m-2 bg-opacity-25 bg-gray-600 rounded-lg text-sm">
+                              className="w-full md:w-max p-4 m-2 bg-opacity-25 bg-gray-300 rounded-lg text-sm">
                               <input
                                 id={value}
                                 type="radio"
