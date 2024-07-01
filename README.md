@@ -2,10 +2,10 @@
 ## Overview
 This project is part of third weekend assignment. The goal is to create an application using Next.js and OpenAI's API that allows users to get detailed descriptions of paintings based on short descriptions they provide.
 
-## Team members
-1. Jesús Vera
-2. Aleksandar Brayanov
-3. Sofía Orellano
+## Team members (Group 8)
+1. Jesús Vera - 2vJSPK 
+2. Aleksandar Brayanov - 4bwGEs 
+3. Sofía Orellano - tJ5Mon
 
 ## Project features
 - **Theme Selection**: users can select painting themes from a list.
