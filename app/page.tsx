@@ -345,7 +345,7 @@ export default function Home() {
           </form>
         </div>
         <div
-          className="md:basis-3/5 basis-full md:overflow-auto"
+          className="md:basis-3/5 basis-full"
           ref={messagesContainerRef}>
           { !imageIsLoading && !image ? (
             <div className="flex flex-col w-full h-full max-w pb-24 mx-auto stretch">
