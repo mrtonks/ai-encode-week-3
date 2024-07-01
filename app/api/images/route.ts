@@ -7,7 +7,7 @@ const openai = new OpenAI({
 export const runtime = "edge";
 
 export async function POST(req: Request) {
-  const { message, imageSize, imageModel, quality, style } = await req.json();
+  const { message, imageSize, imageModel, quality, style, numberOfImages } = await req.json();
   const prompt = `Generate an image that describes the following recipe: ${message}`;
   const response = await openai.images.generate({
     model: imageModel,
@@ -16,7 +16,11 @@ export async function POST(req: Request) {
     quality: quality,
     style: style,
     response_format: "b64_json",
-    n: 1,
+    n: numberOfImages,
   });
-  return new Response(JSON.stringify(response.data[0].b64_json))
+  let responses: string[] = [];
+  for (let i = 0; i < numberOfImages; i++) {
+    responses.push(JSON.stringify(response.data[i].b64_json));
+  }
+  return new Response(responses[0])
 }
