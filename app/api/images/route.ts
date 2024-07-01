@@ -18,9 +18,5 @@ export async function POST(req: Request) {
     response_format: "b64_json",
     n: numberOfImages,
   });
-  let responses: string[] = [];
-  for (let i = 0; i < numberOfImages; i++) {
-    responses.push(JSON.stringify(response.data[i].b64_json));
-  }
-  return new Response(responses[0])
+  return new Response(JSON.stringify(response.data[0].b64_json))
 }

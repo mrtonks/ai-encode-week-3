@@ -38,8 +38,7 @@ export default function Home() {
   const [imageModel, setImageModel] = useState<string>('dall-e-2');
   const [quality, setImageQuality] = useState<string>('standard');
   const [style, setImageStyle] = useState<string>('vivid');
-  const [numberOfImages, setNumberOfImages] = useState<number>(1);
-  //const maxNumberOfImages = 10
+  const numberOfImages: number = 1;
   
   const imageSizesDALLE2 = [
     { emoji: '🤏', value: '256x256' },
@@ -273,7 +272,6 @@ export default function Home() {
                                 setImageSize('1024x1024');
                                 setImageQuality('standard');
                                 setImageStyle('vivid');
-                                setNumberOfImages(1);
                               }}
                             />
                             <label className="ml-2" htmlFor={value}>
@@ -304,26 +302,6 @@ export default function Home() {
                               </div>
                             ))}
                           </div>
-                        {/* 
-                          //TO DO: enable after handling displaying multiple images correctly
-                          <div className="flex items-center justify-between">
-                              <label
-                                htmlFor="numberOfImages"
-                                className="block text-l font-semibold">
-                                Number Of Images
-                              </label>
-                              <input
-                                type="number"
-                                value={numberOfImages}
-                                min="1"
-                                max={maxNumberOfImages}
-                                step="1"
-                                className="w-20 bg-gray-600 rounded-md p-2 text-right"
-                                onChange={(e) => setNumberOfImages(parseInt(e.target.value))}
-                              />
-                          </div>
-                        */}
-                          
                       </div>
                     )}
                     {imageModel === 'dall-e-3' && (
