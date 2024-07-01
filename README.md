@@ -1,4 +1,4 @@
-# AI Panintings description assistant
+# AI Paintings description assistant
 ## Overview
 This project is part of third weekend assignment. The goal is to create an application using Next.js and OpenAI's API that allows users to get detailed descriptions of paintings based on short descriptions they provide.
 
