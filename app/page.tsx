@@ -41,15 +41,15 @@ export default function Home() {
   const numberOfImages: number = 1;
   
   const imageSizesDALLE2 = [
-    { emoji: '🤏', value: '256x256' },
-    { emoji: '◻', value: '512x512' },
-    { emoji: '⌗', value: '1024x1024' },
+    { value: '256x256' },
+    { value: '512x512' },
+    { value: '1024x1024' },
   ]
 
   const imageSizesDALLE3 = [
-    { emoji: '⌗', value: '1024x1024' },
-    { emoji: '↕', value: '1024x1792' },
-    { emoji: '↔', value: '1792x1024' },
+    { value: '1024x1024' },
+    { value: '1024x1792' },
+    { value: '1792x1024' },
   ]
 
   const imageModels = [
@@ -58,8 +58,8 @@ export default function Home() {
   ]
 
   const imageQuality = [
-    { emoji: '🇸🇩', value: 'standard' },
-    { emoji: '🇭', value: 'hd' },
+    { emoji: '🤖', value: 'standard' },
+    { emoji: '🧔🏻‍♂️👩🏻', value: 'hd' },
   ]
 
   const imageStyle = [
@@ -112,9 +112,8 @@ export default function Home() {
           return updatedMessages
         })
       }
+      setIsLoading(false)
     }
-
-    setIsLoading(false)
   }
 
   const handleGenerateImage = async (): Promise<void> => {
@@ -159,31 +158,6 @@ export default function Home() {
     }
   }, [messages])
 
-  if (imageIsLoading) {
-    return (
-      <div className="flex justify-center items-center h-screen">
-        <div className="loader">
-          <div className="animate-pulse flex space-x-4">
-            <div className="rounded-full bg-slate-700 h-10 w-10"></div>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  if (image) {
-    return (
-      <div className="card w-full h-screen max-w-md py-24 mx-auto stretch">
-        <img src={`data:image/jpeg;base64,${image}`} />
-        <textarea
-          className="mt-4 w-full text-white bg-black h-64"
-          value={messages[messages.length - 1].content}
-          readOnly
-        />
-      </div>
-    );
-  }
-
   return (
     <main className="container mx-auto h-screen">
       <div className="text-center mb-6 mt-2">
@@ -221,7 +195,7 @@ export default function Home() {
               </div>
               <div>
                 <input
-                  className="w-full p-2 mb-2 border border-gray-300 rounded shadow-xl text-black"
+                  className="w-full p-2 my-2 border border-gray-300 rounded shadow-xl text-black"
                   // disabled={isLoading}
                   value={description}
                   placeholder="Describe the painting..."
@@ -240,20 +214,8 @@ export default function Home() {
             <div>
             {messages.length === 2 &&  (
               <div>
-                 {isLoading && (
-                  <div className="flex justify-end pr-4">
-                    <span className="animate-bounce">...</span>
-                  </div>
-                )}
-                {!isLoading && (
                 <div>
-                  <button
-                    type="button"
-                    className="w-full bg-green-500 text-white mt-1 py-2 px-4 rounded-md hover:bg-green-600 focus:outline-none focus:ring-4 focus:ring-gray-300 mb-5"
-                    onClick={handleGenerateImage}>
-                    Generate Image
-                  </button>
-                  <div className="space-y-4 bg-opacity-25 bg-blue-700 rounded-lg p-4">
+                  <div className="space-y-4 my-2 bg-opacity-25 bg-blue-700 rounded-lg p-4">
                       <h3 className="text-xl font-semibold">Image Generation Properties</h3>
                       <div className="flex flex-wrap justify-left bg-gray-700 rounded-lg p-2">
                         <h5 className="text-l font-semibold">Model</h5>
@@ -284,7 +246,7 @@ export default function Home() {
                         <div className='bg-gray-600 rounded-lg p-2'>
                           <div className="flex flex-wrap justify-left">
                             <h5 className="text-l font-semibold">Size</h5>
-                            {imageSizesDALLE2.map(({ value, emoji }) => (
+                            {imageSizesDALLE2.map(({ value }) => (
                               <div
                                 key={value}
                                 className="w-full md:w-max p-5 m-2 bg-opacity-25 bg-gray-300 rounded-lg text-sm">
@@ -297,7 +259,7 @@ export default function Home() {
                                   onChange={(e) => setImageSize(e.target.value)}
                                 />
                                 <label className="ml-2" htmlFor={value}>
-                                  {`${emoji} ${value}`}
+                                  {value}
                                 </label>
                               </div>
                             ))}
@@ -308,7 +270,7 @@ export default function Home() {
                       <div className='bg-gray-600 rounded-lg p-2'>
                         <div className="flex flex-wrap justify-left bg-gray-500 rounded-md p-2 mx-1 mb-2">
                           <h5 className="text-l font-semibold">Size</h5>
-                          {imageSizesDALLE3.map(({ value, emoji }) => (
+                          {imageSizesDALLE3.map(({ value }) => (
                             <div
                               key={value}
                               className="w-full md:w-max p-4 m-2 bg-opacity-25 bg-gray-300 rounded-lg text-sm">
@@ -321,7 +283,7 @@ export default function Home() {
                                 onChange={(e) => setImageSize(e.target.value)}
                               />
                               <label className="ml-2" htmlFor={value}>
-                                {`${emoji} ${value}`}
+                                {value}
                               </label>
                             </div>
                           ))}
@@ -369,8 +331,14 @@ export default function Home() {
                       </div>
                     )}
                   </div>
+                  <button
+                    type="button"
+                    className="w-full bg-green-500 text-white mt-1 py-2 px-4 rounded-md hover:bg-green-600 focus:outline-none focus:ring-4 focus:ring-gray-300 mb-5"
+                    disabled={isLoading}
+                    onClick={handleGenerateImage}>
+                    Generate Image
+                  </button>
                 </div>
-                )}
               </div>
               )}
             </div>
@@ -379,38 +347,57 @@ export default function Home() {
         <div
           className="md:basis-3/5 basis-full md:overflow-auto"
           ref={messagesContainerRef}>
-          <div className="flex flex-col w-full h-full max-w pb-24 mx-auto stretch">
-            {!!assistantName && (
-              <div className="whitespace-pre-wrap bg-slate-700 p-3 my-2 rounded-lg text-white">
-                <b>{assistantName}: </b>What kind of painting are you going ask
-                me to describe for you today?
+          { !imageIsLoading && !image ? (
+            <div className="flex flex-col w-full h-full max-w pb-24 mx-auto stretch">
+              {!!assistantName && (
+                <div className="whitespace-pre-wrap bg-slate-700 p-3 my-2 rounded-lg text-white">
+                  <b>{assistantName}: </b>What kind of painting are you going ask
+                  me to describe for you today?
+                </div>
+              )}
+              {messages.map((message, index) => (
+                <div
+                  key={index}
+                  className={`my-2 ${message.role === 'system' && 'flex-grow'}`}>
+                  {message.role === 'user' ? (
+                    <div className="whitespace-pre-wrap bg-green-700 p-3 rounded-lg text-white">
+                      <b>User: </b>
+                      {message.content}
+                    </div>
+                  ) : (
+                    <textarea
+                      className="whitespace-pre-wrap bg-slate-700 p-3 rounded-lg text-white w-full h-full"
+                      style={{ minHeight: '350px' }} // Ensure a minimum height and prevent resizing
+                      value={message.content}
+                      readOnly
+                    />
+                  )}
+                </div>
+              ))}
+              {isLoading && (
+                <div className="flex justify-end pr-4">
+                  <span className="animate-bounce">...</span>
+                </div>
+              )}
+            </div>
+          ) : !image ? (
+            <div className="flex justify-center items-center h-screen">
+              <div className="loader">
+                <div className="animate-pulse flex space-x-4">
+                  <div className="rounded-full bg-slate-700 h-10 w-10"></div>
+                </div>
               </div>
-            )}
-            {messages.map((message, index) => (
-              <div
-                key={index}
-                className={`my-2 ${message.role === 'system' && 'flex-grow'}`}>
-                {message.role === 'user' ? (
-                  <div className="whitespace-pre-wrap bg-green-700 p-3 rounded-lg text-white">
-                    <b>User: </b>
-                    {message.content}
-                  </div>
-                ) : (
-                  <textarea
-                    className="whitespace-pre-wrap bg-slate-700 p-3 rounded-lg text-white w-full h-full"
-                    style={{ minHeight: '350px' }} // Ensure a minimum height and prevent resizing
-                    value={message.content}
-                    readOnly
-                  />
-                )}
-              </div>
-            ))}
-            {isLoading && (
-              <div className="flex justify-end pr-4">
-                <span className="animate-bounce">...</span>
-              </div>
-            )}
-          </div>
+            </div>
+          ) : (
+            <div className="card w-full h-screen max-w-md py-2 mx-auto stretch">
+              <img src={`data:image/jpeg;base64,${image}`} />
+              <textarea
+                className="mt-4 w-full text-white bg-black h-64"
+                value={messages[messages.length - 1].content}
+                readOnly
+              />
+            </div>
+          )}
         </div>
       </div>
     </main>
