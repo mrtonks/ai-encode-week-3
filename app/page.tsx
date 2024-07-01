@@ -14,11 +14,6 @@ export default function Home() {
   const [messages, setMessages] = useState<Array<IMessage>>([])
   const [assistantName, setAssistantName] = useState<string>('')
 
-  const [imageIsLoading, setImageIsLoading] = useState(false);
-  const [image, setImage] = useState<string | null>(null);
-  const [imageSize, setImageSize] = useState<string>('1024x1024');
-  const [imageModel, setImageModel] = useState<string>('dall-e-2');
-
   const themes = [
     { emoji: '🌲', value: 'Nature and Landscapes' },
     { emoji: '🏙️', value: 'Urban and Cityscapes' },
@@ -37,6 +32,13 @@ export default function Home() {
     { emoji: '🏅', value: 'Sports and Recreation' },
   ]
 
+  const [imageIsLoading, setImageIsLoading] = useState(false);
+  const [image, setImage] = useState<string | null>(null);
+  const [imageSize, setImageSize] = useState<string>('1024x1024');
+  const [imageModel, setImageModel] = useState<string>('dall-e-2');
+  const [quality, setImageQuality] = useState<string>('standard');
+  const [style, setImageStyle] = useState<string>('standard');
+  
   const imageSizesDALLE2 = [
     { emoji: '🌲', value: '256x256' },
     { emoji: '🏙️', value: '512x512' },
@@ -52,6 +54,16 @@ export default function Home() {
   const imageModels = [
     { emoji: 'DALL-E 2', value: 'dall-e-2' },
     { emoji: 'DALL-E 3', value: 'dall-e-3' },
+  ]
+
+  const imageQuality = [
+    { emoji: '👤', value: 'standard' },
+    { emoji: '👤', value: 'hd' },
+  ]
+
+  const imageStyle = [
+    { emoji: '👤', value: 'vivid' },
+    { emoji: '👤', value: 'natural' },
   ]
 
   const handleGenerateDescription = async (): Promise<void> => {
@@ -115,6 +127,9 @@ export default function Home() {
         message: messages[messages.length - 1].content,
         imageSize: imageSize,
         imageModel: imageModel,
+        quality: quality,
+        // style: style,
+        // n: 1,
       }),
     });
     const data = await response.json();
@@ -243,6 +258,7 @@ export default function Home() {
                           onChange={(e) => {
                             setImageModel(e.target.value);
                             setImageSize('1024x1024');
+                            setImageQuality('standard');
                           }}
                         />
                         <label className="ml-2" htmlFor={value}>
@@ -274,27 +290,50 @@ export default function Home() {
                     </div>
                   )}
                   {imageModel === 'dall-e-3' && (
-                    <div className="flex flex-wrap justify-center">
-                      <h5 className="text-xl font-semibold">Size</h5>
-                      {imageSizesDALLE3.map(({ value, emoji }) => (
-                        <div
-                          key={value}
-                          className="w-full md:w-max p-4 m-2 bg-opacity-25 bg-gray-600 rounded-lg text-sm">
-                          <input
-                            id={value}
-                            type="radio"
-                            name="size"
-                            value={value}
-                            checked={value === imageSize}
-                            onChange={(e) => setImageSize(e.target.value)}
-                          />
-                          <label className="ml-2" htmlFor={value}>
-                            {`${emoji} ${value}`}
-                          </label>
-                        </div>
-                      ))}
+                    <div>
+                      <div className="flex flex-wrap justify-center">
+                        <h5 className="text-xl font-semibold">Size</h5>
+                        {imageSizesDALLE3.map(({ value, emoji }) => (
+                          <div
+                            key={value}
+                            className="w-full md:w-max p-4 m-2 bg-opacity-25 bg-gray-600 rounded-lg text-sm">
+                            <input
+                              id={value}
+                              type="radio"
+                              name="size"
+                              value={value}
+                              checked={value === imageSize}
+                              onChange={(e) => setImageSize(e.target.value)}
+                            />
+                            <label className="ml-2" htmlFor={value}>
+                              {`${emoji} ${value}`}
+                            </label>
+                          </div>
+                        ))}
+                      </div>
+                      <div className="flex flex-wrap justify-center">
+                        <h5 className="text-xl font-semibold">Quality</h5>
+                        {imageQuality.map(({ value, emoji }) => (
+                          <div
+                            key={value}
+                            className="w-full md:w-max p-4 m-2 bg-opacity-25 bg-gray-600 rounded-lg text-sm">
+                            <input
+                              id={value}
+                              type="radio"
+                              name="quality"
+                              value={value}
+                              checked={value === quality}
+                              onChange={(e) => setImageQuality(e.target.value)}
+                            />
+                            <label className="ml-2" htmlFor={value}>
+                              {`${emoji} ${value}`}
+                            </label>
+                          </div>
+                        ))}
+                      </div>
                     </div>
                   )}
+                  
                 </div>
               )}
             </div>
