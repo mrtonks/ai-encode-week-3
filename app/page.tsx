@@ -389,7 +389,7 @@ export default function Home() {
               </div>
             </div>
           ) : (
-            <div className="card w-full h-screen max-w-md py-2 mx-auto stretch">
+            <div className="card w-full h-screen max-w py-2 mx-auto stretch">
               <img src={`data:image/jpeg;base64,${image}`} />
               <textarea
                 className="mt-4 w-full text-white bg-black h-64"
